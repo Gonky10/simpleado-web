@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.logo {
+    width: 50em; /* 5 veces el tamaño de la fuente base */
+    max-width: 150px;
+    min-width: 60px;
+    height: auto;
+}

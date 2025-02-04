@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@media (max-width: 500px) {
+    .logo {
+        width: 8vw; /* Aumenta en móviles */
+        height: 8vw;
+    }
+}
+
+@media (min-width: 1500px) {
+    .logo {
+        width: 3vw; /* Reduce en pantallas grandes */
+        height: 3vw;
+    }
+}
+
+.logo {
+    border-radius: 10%;
+}
