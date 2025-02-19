@@ -3,19 +3,18 @@
 @tailwind utilities;
 @media (max-width: 500px) {
     .logo {
-        width: 8vw; /* Aumenta en móviles */
-        height: 8vw;
+        width: 10%; /* Aumenta en móviles */
+        height: 10%;
     }
 }
-
-@media (min-width: 1500px) {
+@media (min-width: 500px) {
     .logo {
-        width: 3vw; /* Reduce en pantallas grandes */
-        height: 3vw;
+        width: 3%; /* Reduce en pantallas grandes */
+        height: 3%;
     }
 }
 
-.container{}
+
 
 .logo {
     border-radius: 10%;
@@ -31,3 +30,4 @@
     border-width: 3px;
     border-style: solid;
 }
+

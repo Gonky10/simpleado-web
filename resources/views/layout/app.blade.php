@@ -5,157 +5,196 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Simpleado')</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    <!-- Estilos -->
+
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
 </head>
 
 <body>
-    <div class="container-fluid">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script>
+    <div class="container-fluid" onload="updatePreview()">
 
-        <div class="bg-black text-white card-header d-flex align-items-center justify-content-between pe-3 pt-3 pb-3">
+        <!-- Navbar -->
+        <div class="bg-black text-white card-header d-flex align-items-center justify-content-between  pt-3 pb-3">
             <div class="flex-grow-1 text-center">
                 <p class="mb-0">Simpleado</p>
             </div>
-            <img src="{{ asset('images/Simpleado.png') }}" alt="Simpleado" class="logo rounded">
+            <img src="{{ asset('images/Simpleado.png') }}" alt="Simpleado" class="logo me-2">
         </div>
 
+        <!-- Título -->
         <div class="container d-flex justify-content-center align-items-center">
-            <div class=" p-3 text-center text-black m-5 mt-custom">
+            <div class=" p-3 text-center text-black mt-5 mt-custom">
                 Generador de Flyers
             </div>
         </div>
-
-        <div class="container">
-            <h1>Generador de Flyers</h1>
-
+        <!-- Formulario -->
+        <div class="container mt-3">
             <form id="flyerForm">
-                <label for="recipientName">Título:</label>
-                <input type="text" id="recipientName" name="recipientName" oninput="updatePreview()">
+                <div class="mb-3">
+                    <label for="recipientName" class="form-label">Título:</label>
+                    <input type="text" class="form-control" id="recipientName" name="recipientName"
+                        oninput="updatePreview()">
+                </div>
 
-                <label for="eventDate">Fecha:</label>
-                <input type="date" id="eventDate" name="eventDate" oninput="updatePreview()">
+                <div class="mb-3">
+                    <label for="eventDate" class="form-label">Fecha:</label>
+                    <input type="date" class="form-control" id="eventDate" name="eventDate"
+                        oninput="updatePreview()">
+                </div>
 
-                <label for="eventTime">Hora:</label>
-                <input type="time" id="eventTime" name="eventTime" oninput="updatePreview()">
+                <div class="mb-3">
+                    <label for="eventTime" class="form-label">Hora:</label>
+                    <input type="time" class="form-control" id="eventTime" name="eventTime"
+                        oninput="updatePreview()">
+                </div>
 
-                <label for="eventLocation">Ubicación:</label>
-                <input type="text" id="eventLocation" name="eventLocation" oninput="updatePreview()">
+                <div class="mb-3">
+                    <label for="eventLocation" class="form-label">Ubicación:</label>
+                    <input type="text" class="form-control" id="eventLocation" name="eventLocation"
+                        oninput="updatePreview()">
+                </div>
 
-                <label for="organizerName">Organizador:</label>
-                <input type="text" id="organizerName" name="organizerName" oninput="updatePreview()">
+                <div class="mb-3">
+                    <label for="organizerName" class="form-label">Organizador:</label>
+                    <input type="text" class="form-control" id="organizerName" name="organizerName"
+                        oninput="updatePreview()">
+                </div>
 
-                <label for="headerColor">Color del Header:</label>
-                <input type="color" id="headerColor" name="headerColor" value="#000000" oninput="updatePreview()">
+                <div class="mb-3">
+                    <label for="headerColor" class="form-label">Color del Header:</label>
+                    <input type="color" class="form-control form-control-color" id="headerColor" name="headerColor"
+                        value="#000000" oninput="updatePreview()">
+                </div>
 
-                <label for="footerColor">Color del Footer:</label>
-                <input type="color" id="footerColor" name="footerColor" value="#000000" oninput="updatePreview()">
+                <div class="mb-3">
+                    <label for="footerColor" class="form-label">Color del Footer:</label>
+                    <input type="color" class="form-control form-control-color" id="footerColor" name="footerColor"
+                        value="#000000" oninput="updatePreview()">
+                </div>
 
-                <label for="imageUpload">Imagen:</label>
-                <input type="file" id="imageUpload" name="imageUpload" accept="image/*"
-                    onchange="handleImageUpload()">
-
-                <button type="button" onclick="downloadPDF()">Descargar PDF</button>
+                <div class="mb-3">
+                    <label for="imageUpload" class="form-label">Imagen:</label>
+                    <input type="file" class="form-control" id="imageUpload" name="imageUpload" accept="image/*"
+                        onchange="handleImageUpload()">
+                </div>
+                <div class="container d-flex justify-content-center align-items-center mt-5">
+                    <button type="button" class="btn btn-outline-dark" onclick="downloadPDF()">Descargar PDF</button>
+                </div>
             </form>
-
-            <h2>Vista Previa:</h2>
-            <iframe id="previewFrame" style="width: 100%; height: 500px;"></iframe>
         </div>
 
-        <script>
-            function updatePreview() {
-                let recipientName = document.getElementById("recipientName").value;
-                let eventDate = document.getElementById("eventDate").value;
-                let eventTime = document.getElementById("eventTime").value;
-                let eventLocation = document.getElementById("eventLocation").value;
-                let organizerName = document.getElementById("organizerName").value;
-                let headerColor = document.getElementById("headerColor").value;
-                let footerColor = document.getElementById("footerColor").value;
+        <!-- Vista Previa -->
+        <div class="container preview-container">
 
-                let base64Image = localStorage.getItem("uploadedImage") || "";
-
-                let htmlContent = `
-                    <html>
-                    <head>
-                        <style>
-                            body { font-family: Arial, sans-serif; text-align: center; }
-                            .header, .footer { color: white; padding: 10px; font-size: 24px; }
-                            .header { background-color: ${headerColor}; }
-                            .footer { background-color: ${footerColor}; }
-                            .content { margin-top: 20px; }
-                            .card { padding: 20px; border: 1px solid #ccc; display: inline-block; }
-                            .image-container img { width: 50%; border-radius: 10px; }
-                        </style>
-                    </head>
-                    <body>
-                        <div class="header">🎉 Invitación Especial 🎉</div>
-                        <div class="content">
-                            <div class="card">
-                                <h2>${recipientName || "(Título)"}</h2>
-                                <p>📅 Fecha: ${eventDate || "(Fecha)"}</p>
-                                <p>⏰ Hora: ${eventTime || "(Hora)"}</p>
-                                <p>📍 Lugar: ${eventLocation || "(Ubicación)"}</p>
-                                ${base64Image ? `<div class="image-container"><img src="${base64Image}" alt="Imagen"></div>` : ""}
-                            </div>
-                        </div>
-                        <div class="footer">Organizado por: ${organizerName || "(Organizador)"}</div>
-                    </body>
-                    </html>`;
-
-                document.getElementById("previewFrame").srcdoc = htmlContent;
-            }
-
-            function handleImageUpload() {
-                let input = document.getElementById("imageUpload");
-                let file = input.files[0];
-
-                if (file) {
-                    let reader = new FileReader();
-                    reader.onload = function(e) {
-                        localStorage.setItem("uploadedImage", e.target.result);
-                        updatePreview();
-                    };
-                    reader.readAsDataURL(file);
-                }
-            }
-
-            function downloadPDF() {
-                let formData = new FormData(document.getElementById("flyerForm"));
-                fetch("{{ route('flyers.generatePDF') }}", {
-                        method: "POST",
-                        body: formData,
-                        headers: {
-                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                        }
-                    })
-                    .then(response => response.blob())
-                    .then(blob => {
-                        let url = window.URL.createObjectURL(blob);
-                        let a = document.createElement("a");
-                        a.href = url;
-                        a.download = "flyer.pdf";
-                        document.body.appendChild(a);
-                        a.click();
-                        document.body.removeChild(a);
-                    })
-                    .catch(error => console.error("Error al generar PDF:", error));
-            }
-
-            document.addEventListener("DOMContentLoaded", updatePreview);
-        </script>
+        </div>
 
 
-        <main>
-            @yield('content')
-        </main>
-
+        <div class="ratio ratio-1x1">
+            <iframe id="previewFrame" class="mb-5"></iframe>
+        </div>
 
     </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+
+    <script>
+        let base64Image = ""; // Variable global para almacenar la imagen en base64
+
+        function handleImageUpload() {
+            const fileInput = document.getElementById("imageUpload");
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onloadend = function() {
+                    base64Image = reader.result; // Almacena la imagen en base64
+                    updatePreview(); // Llama a la función de actualización para reflejar cambios
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function updatePreview() {
+            let title = document.getElementById("recipientName").value || "(Título)";
+            let date = document.getElementById("eventDate").value || "(Fecha)";
+            let time = document.getElementById("eventTime").value || "(Hora)";
+            let location = document.getElementById("eventLocation").value || "(Ubicación)";
+            let organizer = document.getElementById("organizerName").value || "(Organizador)";
+            let headerColor = document.getElementById("headerColor").value || "#000000";
+            let footerColor = document.getElementById("footerColor").value || "#000000";
+
+            let previewHTML = `
+        <html>
+        <head>
+            <style>
+                body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+                .header, .footer {
+                    width: 100%;
+                    color: white;
+                    padding: 10px;
+                    font-size: 24px;
+                    text-align: center;
+                }
+                .header { background-color: ${headerColor}; }
+                .footer { background-color: ${footerColor}; }
+                .card {
+                    width: 60%;
+                    margin: auto;
+                    padding: 20px;
+                    background: white;
+                    border: 1px solid #ddd;
+                    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+                }
+                .image-container img {
+                    width: 40%;
+                    height: auto;
+                    margin-top: 10px;
+                    border-radius: 10px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="header">🎉 Invitación Especial 🎉</div>
+            <div class="card">
+                <h2>${title}</h2>
+                <p>📅 Fecha: ${date}</p>
+                <p>⏰ Hora: ${time}</p>
+                <p>📍 Lugar: ${location}</p>
+                ${
+                    base64Image
+                        ? `<div class="image-container">
+                                                    <img src="${base64Image}" alt="Imagen Seleccionada"/>
+                                                  </div>`
+                        : ''
+                }
+            </div>
+            <div class="footer">Organizado por: ${organizer}</div>
+        </body>
+        </html>
+    `;
+
+            let iframe = document.getElementById("previewFrame");
+            iframe.srcdoc = previewHTML;
+        }
+
+        function downloadPDF() {
+            alert("Aquí iría la lógica para descargar el PDF");
+        }
+        window.onload = function() {
+            updatePreview();
+        };
+    </script>
+
 </body>
 
 </html>
