@@ -14,7 +14,64 @@
     }
 }
 
+.width-cont {
+    display: flex;
+    flex-direction: column; /* Organiza los hijos en columna */
+    align-items: center; /* Centra los elementos horizontalmente */
+    justify-content: center; /* Opcional: centra los elementos verticalmente si el contenedor tiene altura */
+    gap: 15vh; /* Espacio uniforme entre los elementos */
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    max-width: 400px; /* Opcional: Limita el ancho en pantallas grandes */
+    margin: auto; /* Centra el contenedor en la página */
+}
 
+
+/* .width-cont{
+    margin-top: 4%;
+    margin-left: 20%;
+    margin-right: 20%;
+} */
+
+.cont-loc{
+    height: 100%;
+}
+
+.div-inp{
+    padding: 10%;
+}
+
+.mtop{
+    margin-top: 40%;
+}
+
+.divdetodo{
+    margin: 5%;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.marginFormFlyers{
+    margin-top: 5%;
+}
+
+
+@media (max-width: 500px) {
+    .divdetodo {
+        margin: 0% !important;
+        margin-top: 15% !important;
+    }
+    .marginFormFlyers{
+        margin-top: 20% !important;
+    }
+}
+
+
+#previewFrame{
+    height: 60vh;
+    width: 90vh;
+}
 
 .logo {
     border-radius: 10%;
